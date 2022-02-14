@@ -1,5 +1,5 @@
-from typing import TypeVar, Generic, Union, Dict, Set
 from __future__ import annotations
+from typing import TypeVar, Generic, Union, Dict, Set
 
 
 T = TypeVar("T")
@@ -22,13 +22,16 @@ class Graph(Generic[T]):
         if len(self._adjacency_list) != len(other._adjacency_list):
             return False
         
-        for vertex, edges in self._adjacency_list:
+        for vertex, edges in self._adjacency_list.items():
             if vertex not in other._adjacency_list:
                 return False
             elif edges != other._adjacency_list[vertex]:
                 return False
         
         return True
+
+    def __len__(self) -> int:
+        return self.verticies()
     
     def is_adjacent(self, center: T, checking: T) -> bool:
         """
@@ -87,3 +90,22 @@ class Graph(Generic[T]):
         """
         
         return self._adjacency_list[vertex] if vertex in self._adjacency_list else None
+
+    def verticies(self) -> int:
+        """
+            Returns the number of verticies within the `Graph`.
+        """
+        
+        return len(self._adjacency_list.keys())
+    
+    def edges(self) -> int:
+        """
+            Returns the number of edges within the `Graph`.
+        """
+        
+        result: int = 0
+        
+        for _, edges in self._adjacency_list.items():
+            result += len(edges)
+        
+        return result
