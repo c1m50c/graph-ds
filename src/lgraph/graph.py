@@ -1,4 +1,5 @@
-from typing import TypeVar, Generic, Dict, Set
+from typing import TypeVar, Generic, Union, Dict, Set
+from __future__ import annotations
 
 
 T = TypeVar("T")
@@ -16,6 +17,26 @@ class Graph(Generic[T]):
     def __init__(self) -> None:
         self._adjacency_list = dict()
         super().__init__()
+    
+    def __eq__(self, other: Graph) -> bool:
+        if len(self._adjacency_list) != len(other._adjacency_list):
+            return False
+        
+        for vertex, edges in self._adjacency_list:
+            if vertex not in other._adjacency_list:
+                return False
+            elif edges != other._adjacency_list[vertex]:
+                return False
+        
+        return True
+    
+    def is_adjacent(self, center: T, checking: T) -> bool:
+        """
+            Returns a `bool` determining if `checking` is adjacent to `center`.
+            Time complexity is `O(1)`.
+        """
+        
+        return checking in self._adjacency_list[center]
     
     def add_vertex(self, vertex: T) -> bool:
         """
@@ -58,3 +79,11 @@ class Graph(Generic[T]):
         
         if vertex_to in self._adjacency_list[vertex_from]:
             self._adjacency_list[vertex_from].remove(vertex_to)
+    
+    def get_vertex(self, vertex: T) -> Union[T, None]:
+        """
+            Returns the `vertex` within the `Graph`, if the `vertex` does not exist this will return `None`.
+            Time complexity is `O(1)`.
+        """
+        
+        return self._adjacency_list[vertex] if vertex in self._adjacency_list else None
