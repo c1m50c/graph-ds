@@ -35,11 +35,21 @@ class Graph(Generic[T]):
     
     def is_adjacent(self, center: T, checking: T) -> bool:
         """
-            Returns a `bool` determining if `checking` is adjacent to `center`.
+            Returns a `bool` determining if `checking` is adjacent to `center`,
+            adjacent in this context meaning that there is an edge connecting from `center` to `checking`.
             Time complexity is `O(1)`.
         """
         
         return checking in self._adjacency_list[center]
+
+    def neighbors(self, vertex: T) -> Set[T]:
+        """
+            Returns a set containing all the neighboring verticies of `vertex`,
+            neighboring in this context meaning that there is an edge connecting from `vertex` to the neighbor.
+            Time complexity is `O(1)`.
+        """
+        
+        return self._adjacency_list[vertex].copy()
     
     def add_vertex(self, vertex: T) -> bool:
         """
