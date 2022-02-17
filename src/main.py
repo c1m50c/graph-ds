@@ -1,10 +1,10 @@
-from .lgraph.graph import Graph as LGraph
+from .directed.graph import Graph as DirGraph
 import unittest as ut
 
 
-class TestLGraph(ut.TestCase):
+class TestDirGraph(ut.TestCase):
     def test_add_vertex(self):
-        graph = LGraph()
+        graph = DirGraph()
         
         graph.add_vertex(5)
         graph.add_vertex(2)
@@ -13,7 +13,7 @@ class TestLGraph(ut.TestCase):
         self.assertEqual(graph.verticies(), 3)
     
     def test_remove_vertex(self):
-        graph = LGraph()
+        graph = DirGraph()
         
         graph.add_vertex(1)
         graph.add_vertex(2)
@@ -23,7 +23,7 @@ class TestLGraph(ut.TestCase):
         self.assertEqual(graph.verticies(), 2)
     
     def test_add_edge(self):
-        graph = LGraph()
+        graph = DirGraph()
         
         graph.add_vertex(1)
         graph.add_vertex(2)
@@ -34,7 +34,7 @@ class TestLGraph(ut.TestCase):
         self.assertEqual(graph.edges(), 2)
     
     def test_remove_edge(self):
-        graph = LGraph()
+        graph = DirGraph()
         
         graph.add_vertex(1)
         graph.add_vertex(2)
@@ -46,7 +46,7 @@ class TestLGraph(ut.TestCase):
         self.assertEqual(graph.edges(), 1)
     
     def test_eq(self):
-        graph_a, graph_b = LGraph(), LGraph()
+        graph_a, graph_b = DirGraph(), DirGraph()
         
         graph_a.add_vertex(1)
         graph_a.add_vertex(2)

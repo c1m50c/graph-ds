@@ -30,6 +30,9 @@ class Graph(Generic[T]):
         
         return True
 
+    def __bool__(self) -> bool:
+        return self.verticies() != 0
+
     def __len__(self) -> int:
         return self.verticies()
     
